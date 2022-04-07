@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if request.method == "GET" %}
+        <p>To jest GET</p>
+    {% elif request.method == "POST" %}
+        <p>To jest POST</p>
+    {% elif request.method == "PUT" %}
+        <p>To jest PUT</p>
+    {% elif request.method == "DELETE" %}
+        <p>To jest DELETE</p>
+    {% endif %}
+{% endblock %}

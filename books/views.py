@@ -48,20 +48,21 @@ def check_http_query_type(request: WSGIRequest) -> HttpResponse:
     """
     Remember to turn off CSRF token, ONLY FOR TESTS - for a while
     """
-    query_type = "?"
-    if request.method == "GET":
-        query_type = "to jest GET - tutaj nie powinnismy dodawac i czytac BODY"
-    elif request.method == "POST":
-        query_type = "to jest POST - tutaj dane leca w BODY"
-    elif request.method == "PUT":
-        query_type = "to jest PUT - tutaj dane leca w BODY"
-    elif request.method == "DELETE":
-        query_type = "to jest DELETE - tutaj nie powinnismy dodawac i czytac BODY"
-    """
-    haslo ciekawostka - model dojrzalosci Richardsona 
-    https://devkr.pl/2018/04/10/restful-api-richardson-maturity-model/
-    """
-    return HttpResponse(query_type)
+    # query_type = "?"
+    # if request.method == "GET":
+    #     query_type = "to jest GET - tutaj nie powinnismy dodawac i czytac BODY"
+    # elif request.method == "POST":
+    #     query_type = "to jest POST - tutaj dane leca w BODY"
+    # elif request.method == "PUT":
+    #     query_type = "to jest PUT - tutaj dane leca w BODY"
+    # elif request.method == "DELETE":
+    #     query_type = "to jest DELETE - tutaj nie powinnismy dodawac i czytac BODY"
+    # """
+    # haslo ciekawostka - model dojrzalosci Richardsona
+    # https://devkr.pl/2018/04/10/restful-api-richardson-maturity-model/
+    # """
+    # return HttpResponse(query_type)
+    return render(request, template_name="methods.html", context={})
 
 
 def get_headers(request: WSGIRequest) -> JsonResponse:
