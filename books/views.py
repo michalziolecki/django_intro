@@ -16,8 +16,9 @@ def get_hello_world(request: WSGIRequest) -> HttpResponse:
 
 def get_uuids_list_a(request: WSGIRequest) -> HttpResponse:
     uuids = [str(uuid4()) for _ in range(10)]
-    uuids_as_json = json.dumps(uuids)
-    return HttpResponse(uuids_as_json)
+    # uuids_as_json = json.dumps(uuids)
+    # return HttpResponse(uuids_as_json)
+    return render(request, template_name="uuids_list.html", context={"uuids": uuids})
 
 
 def get_uuids_list_b(request: WSGIRequest) -> JsonResponse:
