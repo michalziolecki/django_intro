@@ -1,3 +1,4 @@
+-- general console commands
  7606  git clone https://github.com/michalziolecki/django_intro.git
  7607  ls -la
  7608  cd django_intro
@@ -35,4 +36,27 @@
  7876  python manage.py migrate
 7880  python manage.py createsuperuser
  python manage.py startapp books
-
+git checkout -b orm_models
+python manage.py shell
+python manage.py dumpdata viewer --output fixtures.json
+python manage.py loaddata fixtures.json
+-- in django shell
+>>> from django.contrib.auth.models import User
+>>> User.objects.all()
+<QuerySet [<User: user>]>
+>>> for user in User.objects.all()
+  File "<console>", line 1
+    for user in User.objects.all()
+                                  ^
+SyntaxError: invalid syntax
+>>> for user in User.objects.all():
+...   user
+...
+<User: user>
+>>> for user in User.objects.all():
+...   user.username
+...
+'user'
+>>>
+>>> qs = User.objects.all()
+>>> print(qs.query)
