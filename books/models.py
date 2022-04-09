@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 
 class BookAuthor(models.Model):
@@ -19,9 +18,10 @@ class Category(models.Model):
 class Book(models.Model):
     title = models.TextField()
     authors = models.ManyToManyField(BookAuthor)
-    published_date = models.DateField(unique=False, null=True)
+    publisher = models.TextField(null=True)
+    published_date = models.DateField(null=True)
     categories = models.ManyToManyField(Category)
-    average_rating = models.FloatField(default=0.0)
+    average_rating = models.FloatField(null=True)
 
     def __str__(self):
         return f"{self.title} - {self.authors} - {self.published_date}"
