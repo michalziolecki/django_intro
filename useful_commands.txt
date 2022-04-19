@@ -60,3 +60,6 @@ SyntaxError: invalid syntax
 >>>
 >>> qs = User.objects.all()
 >>> print(qs.query)
+
+python manage.py dumpdata books --output books.json
+python manage.py loaddata books.json
