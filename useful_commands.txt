@@ -63,3 +63,27 @@ SyntaxError: invalid syntax
 
 python manage.py dumpdata books --output books.json
 python manage.py loaddata books.json
+
+In [4]: Book.objects.count()
+Out[4]: 15500
+
+Book.objects.filter(published_date__year__lt=2022)
+Book.objects.filter(published_date__year__gt=2021)
+Book.objects.filter(published_date__year__range=(2018,2022))
+
+Book.objects.filter(title__icontains='Harry').all()
+Book.objects.filter(title__icontains='Harry').count()
+
+ from django.db.models import Q
+ Book.objects.filter(Q(title__icontains='Harry') | Q(title__icontains='Tolkien')).count()
+BookAuthor.objects.filter(~Q(name__icontains='Eric')).count()
+BookAuthor.objects.filter(Q(name__icontains='Eric')).count()
+BookAuthor.objects.filter(name__icontains='Eric').exclude().count()
+BookAuthor.objects.filter(name__icontains='William').exists()
+Book.objects.filter(authors__name__icontains='Eric').order_by('-published_date')
+for x in Book.objects.filter(authors__name__icontains='Eric').order_by('-published_date').all():
+    ...:     print(x.authors.all())
+In [45]: from django.db.models import Q, Avg
+
+In [46]: Book.objects.aggregate(average=Avg('average_rating'))
+Out[46]: {'average': 4.023560209424084}
