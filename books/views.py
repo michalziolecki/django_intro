@@ -11,9 +11,9 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 # CBV below
-from django.views.generic import ListView, TemplateView, DetailView, FormView
+from django.views.generic import ListView, TemplateView, DetailView, FormView, CreateView
 
-from books.forms import CategoryForm
+from books.forms import CategoryForm, BookForm
 from books.models import BookAuthor, Category, Book
 
 
@@ -63,6 +63,22 @@ class CategoryCreateFormView(FormView):
     def form_invalid(self, form):
         print(f"form invalid!!! for: {form}")
         return super().form_invalid(form)
+
+
+class BookCreateView(CreateView):
+    template_name = "book_form.html"
+    form_class = BookForm
+    success_url = reverse_lazy("book_list")
+
+    # def form_invalid(self, form):
+    #     # something for example logs..
+    #     return super().form_invalid(form)
+
+
+class AuthorCreateView(CreateView):
+    template_name = "author_form.html"
+    form_class = BookForm
+    success_url = reverse_lazy("author_list")
 
 
 # FBV below
