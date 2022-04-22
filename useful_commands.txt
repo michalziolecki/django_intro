@@ -87,3 +87,8 @@ In [45]: from django.db.models import Q, Avg
 
 In [46]: Book.objects.aggregate(average=Avg('average_rating'))
 Out[46]: {'average': 4.023560209424084}
+
+
+ for q in "abcdefghijklmnoprstuwqxyz-.":
+   ...:     print(f"now is running: {q}")
+   ...:     print(f"written: {len(get_books_from_google_api(q))}")

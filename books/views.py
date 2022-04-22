@@ -4,13 +4,13 @@ from uuid import uuid4
 from django.core.exceptions import BadRequest
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 
 # CBV below
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, DetailView
 
 from books.models import BookAuthor, Category, Book
 
@@ -34,6 +34,15 @@ class BookListView(ListView):
     paginate_by = 10
     # queryset = Book.objects.all()
     model = Book
+
+
+class BookDetailView(DetailView):
+    template_name = "book_detail.html"
+    model = Book
+    # queryset = Book.objects.all()
+
+    def get_object(self, **kwargs):
+        return get_object_or_404(Book, id=self.kwargs.get("pk"))
 
 
 # FBV below

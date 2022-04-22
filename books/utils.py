@@ -67,7 +67,7 @@ def _build_book_from_item(item: Dict[str, Any]) -> Book:
     book_info: Dict[str, Any] = item["volumeInfo"]
     # update_or_create return tuple of [Object, IsCreated] - we need only object in that case
     authors = [BookAuthor.objects.update_or_create(name=author_name)[0] for author_name in book_info.get("authors", [])]
-    categories = [Category.objects.update_or_create(name=category_name)[0] for category_name in book_info.get("authors", [])]
+    categories = [Category.objects.update_or_create(name=category_name)[0] for category_name in book_info.get("categories", [])]
     book = Book.objects.update_or_create(
         title=book_info.get("title"),
         publisher=book_info.get("publisher"),
