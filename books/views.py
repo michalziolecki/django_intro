@@ -5,9 +5,24 @@ from django.core.exceptions import BadRequest
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 
+# CBV below
+from books.models import BookAuthor
+
+
+class AuthorList(View):
+    template_name = "author_list.html"
+    queryset = BookAuthor.objects.all()
+
+    def get(self, request, *args, **kwargs) -> HttpResponse:
+        context = {"authors": self.queryset}
+        return render(request, self.template_name, context)
+
+
+# FBV below
 def get_hello_world(request: WSGIRequest) -> HttpResponse:
     # return HttpResponse("Hello world")
     hello_str: str = "Hello world"

@@ -19,8 +19,10 @@ from django.urls import path, include
 
 # from books.views import get_hello_world, get_uuids_list_a, get_uuids_list_b, get_argument_from_path, \
 #     get_arguments_from_query, check_http_query_type, get_headers, raise_error_for_fun
+from books.views import get_hello_world
 
 urlpatterns = [
+    path('', get_hello_world, name="home"),
     # path('admin/', admin.site.urls),
     path('books/', include('books.urls'))
     # path('', get_hello_world, name="home"),
