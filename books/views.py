@@ -5,13 +5,15 @@ from django.core.exceptions import BadRequest
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 
 # CBV below
-from django.views.generic import ListView, TemplateView, DetailView
+from django.views.generic import ListView, TemplateView, DetailView, FormView
 
+from books.forms import CategoryForm
 from books.models import BookAuthor, Category, Book
 
 
@@ -43,6 +45,24 @@ class BookDetailView(DetailView):
 
     def get_object(self, **kwargs):
         return get_object_or_404(Book, id=self.kwargs.get("pk"))
+
+
+class CategoryCreateFormView(FormView):
+    template_name = "category_base_form.html"
+    form_class = CategoryForm
+    success_url = reverse_lazy("category_list")
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        print(f"form = {form}")
+        print(f"form.cleaned_data = {form.cleaned_data}")  # cleaned means with removed html indicators
+        check_entity = Category.objects.create(**form.cleaned_data)
+        print(f"check_entity-id={check_entity.id}")
+        return result
+
+    def form_invalid(self, form):
+        print(f"form invalid!!! for: {form}")
+        return super().form_invalid(form)
 
 
 # FBV below
