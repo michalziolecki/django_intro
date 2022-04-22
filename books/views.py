@@ -10,16 +10,30 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 # CBV below
-from books.models import BookAuthor
+from django.views.generic import ListView, TemplateView
+
+from books.models import BookAuthor, Category, Book
 
 
-class AuthorList(View):
+class AuthorListBaseView(View):
     template_name = "author_list.html"
     queryset = BookAuthor.objects.all()
 
     def get(self, request, *args, **kwargs) -> HttpResponse:
         context = {"authors": self.queryset}
         return render(request, self.template_name, context)
+
+
+class CategoryListTemplateView(TemplateView):
+    template_name = "category_list.html"
+    extra_context = {"categories": Category.objects.all()}
+
+
+class BookListView(ListView):
+    template_name = "book_list.html"
+    paginate_by = 10
+    # queryset = Book.objects.all()
+    model = Book
 
 
 # FBV below
