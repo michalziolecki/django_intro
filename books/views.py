@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 # CBV below
-from django.views.generic import ListView, TemplateView, DetailView, FormView, CreateView, UpdateView
+from django.views.generic import ListView, TemplateView, DetailView, FormView, CreateView, UpdateView, DeleteView
 
 from books.forms import CategoryForm, BookForm, AuthorForm
 from books.models import BookAuthor, Category, Book
@@ -108,6 +108,16 @@ class BookUpdateView(UpdateView):
     def get_object(self, **kwargs):
         return get_object_or_404(Book, id=self.kwargs.get("pk"))
 
+
+class BookDeleteView(DeleteView):
+    template_name = "book_delete.html"
+    model = Book
+
+    def get_object(self, **kwargs):
+        return get_object_or_404(Book, id=self.kwargs.get("pk"))
+
+    def get_success_url(self):
+        return reverse_lazy("book_list")
 
 # FBV below
 def get_hello_world(request: WSGIRequest) -> HttpResponse:
