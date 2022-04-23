@@ -40,10 +40,6 @@ class BookForm(ModelForm):
         ]
 
     title = CharField(min_length=3, max_length=256, required=True)
-    authors = ModelMultipleChoiceField(
-        queryset=BookAuthor.objects.all()[:10],
-        widget=CheckboxSelectMultiple
-    )
 
     def clean(self):
         result = super().clean()
