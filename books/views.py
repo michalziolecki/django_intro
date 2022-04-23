@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 # CBV below
-from django.views.generic import ListView, TemplateView, DetailView, FormView, CreateView
+from django.views.generic import ListView, TemplateView, DetailView, FormView, CreateView, UpdateView
 
 from books.forms import CategoryForm, BookForm, AuthorForm
 from books.models import BookAuthor, Category, Book
@@ -71,13 +71,22 @@ class AuthorCreateView(CreateView):
     success_url = reverse_lazy("author_list")
 
 
+class AuthorUpdateView(UpdateView):
+    template_name = "author_form.html"
+    form_class = AuthorForm
+    success_url = reverse_lazy("author_list")
+
+    def get_object(self, **kwargs):
+        return get_object_or_404(BookAuthor, id=self.kwargs.get("pk"))
+
+
 class BookCreateView(CreateView):
     template_name = "book_form.html"
     form_class = BookForm
-    success_url = reverse_lazy("book_list")
+    # success_url = reverse_lazy("book_list")
 
-    # def get_success_url(self):
-    #     return reverse_lazy("book_list")
+    def get_success_url(self):
+        return reverse_lazy("book_list")
 
     # def form_valid(self, form):
     #     # something for example logs..
@@ -86,6 +95,18 @@ class BookCreateView(CreateView):
     # def form_invalid(self, form):
     #     # something for example logs..
     #     return super().form_invalid(form)
+
+
+class BookUpdateView(UpdateView):
+    template_name = "book_form.html"
+    form_class = BookForm
+    # success_url = reverse_lazy("book_list")
+
+    def get_success_url(self):
+        return reverse_lazy("book_list")
+
+    def get_object(self, **kwargs):
+        return get_object_or_404(Book, id=self.kwargs.get("pk"))
 
 
 # FBV below
