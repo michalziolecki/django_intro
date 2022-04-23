@@ -92,3 +92,23 @@ Out[46]: {'average': 4.023560209424084}
  for q in "abcdefghijklmnoprstuwqxyz-.":
    ...:     print(f"now is running: {q}")
    ...:     print(f"written: {len(get_books_from_google_api(q))}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
