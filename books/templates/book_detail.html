@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {{ object }}
+    <h2> title: {{ object.title }},
+        <br></br>
+        authors:
+    {% for author in object.authors.all %}
+        {{ author }}
+    {% endfor %} </h2>
 {% endblock %}
