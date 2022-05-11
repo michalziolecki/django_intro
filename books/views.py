@@ -15,6 +15,10 @@ from django.views.generic import ListView, TemplateView, DetailView, FormView, C
 
 from books.forms import CategoryForm, BookForm, AuthorForm
 from books.models import BookAuthor, Category, Book
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 class AuthorListBaseView(View):
@@ -22,6 +26,7 @@ class AuthorListBaseView(View):
     queryset = BookAuthor.objects.all()
 
     def get(self, request, *args, **kwargs) -> HttpResponse:
+        logger.debug("DUPA!!!")
         context = {"authors": self.queryset}
         return render(request, self.template_name, context)
 
