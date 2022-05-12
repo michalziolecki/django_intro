@@ -93,9 +93,15 @@ Out[46]: {'average': 4.023560209424084}
    ...:     print(f"now is running: {q}")
    ...:     print(f"written: {len(get_books_from_google_api(q))}")
 
-from django.contrib.auth import authenticate
-authenticate(username='piotr', password='correctpasswd')
-<User: piotr>
+### auth
+from django.contrib.auth.models import User
+user = User.objects.create_user('john', 'lennon@gmail.com', 'johnpassword')
+user.save()
+user.set_password("newpassword")
 
-python manage.py changepassword piotr
+from django.contrib.auth import authenticate
+auth_result = authenticate(username='john', password='newpassword')
+<User: john>
+
+python manage.py changepassword john
 
