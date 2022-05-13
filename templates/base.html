@@ -6,6 +6,14 @@
 </head>
 <body>
 <h1>Base template</h1>
+<h2>User status</h2>
+{% if is_auth %}
+    <h3>Is not authenticated</h3>
+{% else %}
+    <h3>Is authenticated</h3>
+{% endif %}
+<h2>user name: </h2>
+<p>{{ user }}</p>
 <p>below content :) <br></p>
 {% block content %}
 {% endblock %}

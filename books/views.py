@@ -127,8 +127,8 @@ class BookDeleteView(DeleteView):
 # FBV below
 def get_hello_world(request: WSGIRequest) -> HttpResponse:
     # return HttpResponse("Hello world")
-    hello_str: str = "Hello world"
-    return render(request, template_name="hello_world.html", context={"hello_var": hello_str})
+    is_auth: bool = request.user.is_authenticated
+    return render(request, template_name="hello_world.html", context={"hello_var": "Hello", "is_auth": is_auth})
 
 
 def get_uuids_list_a(request: WSGIRequest) -> HttpResponse:
