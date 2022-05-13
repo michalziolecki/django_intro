@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'books'
+    'books',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -69,7 +70,7 @@ LOGGING = {
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # django domyslnie szuka w katalogach app/templates musimy dodac katalog w root/templates
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],  # django domyslnie szuka w katalogach app/templates musimy dodac katalog w root/templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

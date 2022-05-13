@@ -24,7 +24,8 @@ from books.views import get_hello_world
 urlpatterns = [
     path('', get_hello_world, name="home"),
     # path('admin/', admin.site.urls),
-    path('books/', include('books.urls'))
+    path('books/', include('books.urls')),
+    path('users/', include('users.urls')),
     # path('', get_hello_world, name="home"),
     # path('uuids_a/', get_uuids_list_a, name="uuids_a"),
     # path('uuids_b/', get_uuids_list_b, name="uuids_b"),
