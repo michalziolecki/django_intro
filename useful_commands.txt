@@ -105,3 +105,4 @@ auth_result = authenticate(username='john', password='newpassword')
 
 python manage.py changepassword john
 
+User.objects.filter(username="testsignup").get()
