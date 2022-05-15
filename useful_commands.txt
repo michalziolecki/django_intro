@@ -106,3 +106,8 @@ auth_result = authenticate(username='john', password='newpassword')
 python manage.py changepassword john
 
 User.objects.filter(username="testsignup").get()
+
+from django.contrib.auth.models import Group, Permission
+Permission.objects.all()
+In [16]: permission = Permission.objects.get(name='Can view book')
+In [17]:  user.user_permissions.add(permission)
